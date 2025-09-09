@@ -84,7 +84,7 @@
             <div>
               <div class="font-semibold text-slate-900">Contact</div>
               <ul class="mt-3 space-y-2">
-                <li>Summit County, CO</li>
+                <!-- <li>Summit County, CO</li> -->
                 <li><a class="hover:underline" href="tel:+19704180055">(970) 418-0055</a></li>
                 <li><a class="hover:underline" href="mailto:hello@summitcopiers.com">hello@summitcopiers.com</a></li>
               </ul>
