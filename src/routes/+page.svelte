@@ -102,8 +102,8 @@
         <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">
           Best Deals on <span class="text-emerald-300">Kyocera</span> Copiers in the Colorado Rockies
         </h1>
-        <p class="mt-5 text-lg md:text-xl text-slate-200">
-          Local delivery & installs across Summit and Eagle counties. Rugged reliability, low cost-per-page, and mountain-ready service—backed by Kyocera’s legendary durability.
+        <p class="mt-5 text-lg md:text-2xl text-slate-100 font-semibold">
+          We Know Mountain Business! Rugged reliability and mountain-ready service—backed by Kyocera’s legendary durability.
         </p>
         <div class="mt-8 flex flex-col sm:flex-row gap-4">
           <a href="#contact" class="rounded-xl bg-emerald-500 px-6 py-3 font-semibold text-slate-900 hover:bg-emerald-400">
@@ -113,7 +113,7 @@
             See Current Deals
           </a>
         </div>
-        <p class="mt-6 text-sm opacity-80">Fast installs • Lease or buy • Managed print • Local technicians</p>
+        <p class="mt-6 text-md  font-semibold">Fast installs • Lease or buy • Managed print • Local technicians</p>
       </div>
     </div>
 
