@@ -1,324 +1,252 @@
 <script>
   import Modal from '$lib/components/Modal.svelte';
-  import VideosSection from '$lib/components/VideosSection.svelte';
-  import ScreenshotsSection from '$lib/components/ScreenshotsSection.svelte';
-  import IntegrationsSection from '$lib/components/IntegrationsSection.svelte'; 
-  import FeaturesSection from '$lib/components/FeaturesSection.svelte';
 
-  let isModalOpen = false;
+  let navOpen = $state(false);
 
-  const videos = [
-    { id: 'dQw4w9WgXcQ', title: 'Demo Video 1' },
-    { id: 'eY52Zsg-KVI', title: 'Demo Video 2' },
-    { id: 'kxopViU98Xo', title: 'Demo Video 3' },
+  const toggleNav = () => {
+    navOpen = !navOpen;
+  };
+
+  // Swap these with real assets when ready
+  const models = $state([
+    {
+      name: "Kyocera TASKalfa 3554ci",
+      blurb: "Color A3 MFP • 35 ppm • Robust finishing • App-enabled.",
+      price: "$139/mo",
+      cta: "Get This Deal",
+      image: "/models/ta-3554ci.png"
+    },
+    {
+      name: "Kyocera ECOSYS M3655idn",
+      blurb: "B/W A4 • 57 ppm • Low TCO • Perfect for distributed teams.",
+      price: "$79/mo",
+      cta: "Get This Deal",
+      image: "/models/mz-3200i.png"
+    },
+    {
+      name: "Kyocera TASKalfa 5054ci",
+      blurb: "Color A3 MFP • 50 ppm • Production-grade reliability.",
+      price: "$189/mo",
+      cta: "Get This Deal",
+      image: "/models/ta-5054ci.png"
+    }
+  ]);
+
+  const serviceAreas = [
+    "Vail", "Avon", "Eagle", "Edwards", "Breckenridge",
+    "Frisco", "Silverthorne", "Dillon", "Aspen", "Snowmass",
+    "Steamboat Springs", "Glenwood Springs", "Summit County", "Eagle County"
   ];
 
-  const screenshots = [
-    { src: '/screenshots/Screenshot1.png', alt: 'Dashboard Overview', description: 'Dashboard Overview' },
-    { src: '/screenshots/Screenshot2.png', alt: 'Inventory Management', description: 'Inventory Management' },
-    { src: '/screenshots/Screenshot3.png', alt: 'Analytics Dashboard', description: 'Analytics Dashboard' },
-    { src: '/screenshots/Screenshot4.png', alt: 'User Settings', description: 'User Settings' },
-    { src: '/screenshots/Screenshot5.png', alt: 'Service Tech Routing', description: 'Service Tech Routing' },
-    { src: '/screenshots/Screenshot6.png', alt: 'Shipping Integration', description: 'Shipping Integration' },
-  ];
+  function scrollToId(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
 </script>
 
-<!-- Home Section -->
-<section id="home" class="bg-slate-800 text-white py-24">
-  <div class="container mx-auto px-4 text-center">
-    <h1 class="text-5xl font-bold mb-6">🚀 Revolutionize Your Office Equipment Dealership</h1>
-    <p class="text-xl mb-8 max-w-2xl mx-auto">DealerEdge – The Modern, Web-Based Management System Designed for Today's Dealers</p>
-    <button
-      class="bg-white text-slate-800 px-6 py-3 rounded-md text-lg font-semibold hover:bg-gray-200 transition-colors"
-      on:click={() => isModalOpen = true}
-    >
-      Get Started
-    </button>
-  </div>
-</section>
+<svelte:head>
+  <title>Summit Copiers | Best Deals on Kyocera Copiers in the Colorado Rockies</title>
+  <meta name="description" content="Summit Copiers delivers Kyocera copiers, printers, and managed print to the Colorado Rockies—fast installs, local service, and unbeatable lease pricing." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<!-- Features Section -->
-<section id="features" class="py-20 bg-gray-50">
-  <div class="container mx-auto px-4">
-    <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">✨ Features</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
-      <!-- Feature 1 -->
-      <div class="flex flex-col items-center text-center">
-        <span class="text-5xl text-slate-800">🔒</span>
-        <h3 class="text-2xl font-semibold mt-4 text-gray-800">Modern Security</h3>
-        <p class="mt-2 text-gray-600">State-of-the-art security practices including data encryption, regular updates, and user access controls to keep your data safe.</p>
-      </div>
-      <!-- Feature 2 -->
-      <div class="flex flex-col items-center text-center">
-        <span class="text-5xl text-slate-800">🤖</span>
-        <h3 class="text-2xl font-semibold mt-4 text-gray-800">AI-Powered</h3>
-        <p class="mt-2 text-gray-600">Leverage AI for predictive analytics, automated customer service responses, and smarter decision-making.</p>
-      </div>
-      <!-- Feature 3 -->
-      <div class="flex flex-col items-center text-center">
-        <span class="text-5xl text-slate-800">🚚</span>
-        <h3 class="text-2xl font-semibold mt-4 text-gray-800">Integrated Shipping</h3>
-        <p class="mt-2 text-gray-600">Real-time shipping updates, automated label generation, and seamless integration with major carriers.</p>
-      </div>
-      <!-- Feature 4 -->
-      <div class="flex flex-col items-center text-center">
-        <span class="text-5xl text-slate-800">📦</span>
-        <h3 class="text-2xl font-semibold mt-4 text-gray-800">Smart Inventory</h3>
-        <p class="mt-2 text-gray-600">Automated stock tracking with low-stock alerts and integration with QuickBooks to keep your accountant happy.</p>
-      </div>
-      <!-- Feature 5 -->
-      <div class="flex flex-col items-center text-center">
-        <span class="text-5xl text-slate-800">🛠️</span>
-        <h3 class="text-2xl font-semibold mt-4 text-gray-800">Service Tech Routing</h3>
-        <p class="mt-2 text-gray-600">Optimized technician schedules and real-time tracking to ensure efficient service operations.</p>
-      </div>
-      <!-- Feature 6 -->
-      <div class="flex flex-col items-center text-center">
-        <span class="text-5xl text-slate-800">📈</span>
-        <h3 class="text-2xl font-semibold mt-4 text-gray-800">Analytics & Reporting</h3>
-        <p class="mt-2 text-gray-600">Detailed analytics and customizable reports to help you make informed business decisions.</p>
+  <!-- Open Graph -->
+  <meta property="og:title" content="Summit Copiers | Kyocera in the Colorado Rockies" />
+  <meta property="og:description" content="Unbeatable Kyocera copier leases & service across Summit & Eagle counties. Local. Reliable. Mountain-ready." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.summitcopiers.com" />
+  <meta property="og:image" content="https://www.summitcopiers.com/og-image.jpg" />
+
+  <!-- Brand colors (Navy / Slate / Pine) -->
+  <meta name="theme-color" content="#0D2B45" />
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"LocalBusiness",
+      "name":"Summit Copiers",
+      "url":"https://www.summitcopiers.com",
+      "logo":"https://www.summitcopiers.com/logo.svg",
+      "image":"https://www.summitcopiers.com/og-image.jpg",
+      "telephone":"+1-000-000-0000",
+      "areaServed":[
+        "Vail","Avon","Eagle","Edwards","Breckenridge","Frisco","Silverthorne",
+        "Dillon","Aspen","Snowmass","Steamboat Springs","Glenwood Springs","Summit County","Eagle County"
+      ],
+      "makesOffer":[{"@type":"Offer","itemOffered":{"@type":"Product","name":"Kyocera TASKalfa & ECOSYS series"}}],
+      "sameAs":[]
+    }
+  </script>
+</svelte:head>
+
+<!-- Page wrapper -->
+<div class="min-h-screen bg-slate-400 text-slate-900 selection:bg-emerald-200/60">
+
+  <!-- Header -->
+
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <!-- Abstract mountain background -->
+    <svg class="absolute inset-0 -z-10 h-full w-full" viewBox="0 0 1440 560" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+          <stop offset="0%" stop-color="#0D2B45"/>
+          <stop offset="100%" stop-color="#274C5E"/>
+        </linearGradient>
+      </defs>
+      <rect width="1440" height="560" fill="url(#g1)"></rect>
+      <path d="M0,520 L240,360 L420,460 L600,300 L780,440 L960,320 L1200,420 L1440,300 L1440,560 L0,560 Z" fill="#123248" fill-opacity="0.5"></path>
+      <path d="M0,540 L260,380 L420,460 L640,320 L860,460 L1100,360 L1300,430 L1440,360 L1440,560 L0,560 Z" fill="#155B4A" fill-opacity="0.25"></path>
+    </svg>
+
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 md:py-28 text-white">
+      <div class="max-w-2xl">
+        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">
+          Best Deals on <span class="text-emerald-300">Kyocera</span> Copiers in the Colorado Rockies
+        </h1>
+        <p class="mt-5 text-lg md:text-xl text-slate-200">
+          Local delivery & installs across Summit and Eagle counties. Rugged reliability, low cost-per-page, and mountain-ready service—backed by Kyocera’s legendary durability.
+        </p>
+        <div class="mt-8 flex flex-col sm:flex-row gap-4">
+          <a href="#contact" class="rounded-xl bg-emerald-500 px-6 py-3 font-semibold text-slate-900 hover:bg-emerald-400">
+            Get My Quote
+          </a>
+          <a href="#models" class="rounded-xl border border-white/30 px-6 py-3 font-semibold hover:bg-white/10">
+            See Current Deals
+          </a>
+        </div>
+        <p class="mt-6 text-sm opacity-80">Fast installs • Lease or buy • Managed print • Local technicians</p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<FeaturesSection />
-
-
-<!-- Videos Section -->
-<VideosSection {videos} />
-
-<!-- Testimonials Section -->
-<section id="testimonials" class="py-20 bg-gray-800 text-white">
-  <div class="container mx-auto px-4">
-    <h2 class="text-4xl font-bold text-center mb-12">💬 What Dealers Are Saying</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-      <!-- Testimonial 1 -->
-      <div class="bg-white text-slate-800 p-8 rounded-lg shadow-lg">
-        <p class="text-gray-700 italic">"DealerEdge has transformed our dealership operations. The AI features and QuickBooks integration have significantly increased our efficiency and profitability."</p>
-        <h4 class="mt-6 font-semibold text-gray-800">- Tina Shekli, OfficePro Dealers</h4>
-      </div>
-      <!-- Testimonial 2 -->
-      <div class="bg-white text-slate-800 p-8 rounded-lg shadow-lg">
-        <p class="text-gray-700 italic">"The modern security practices give us peace of mind, and the smart inventory management keeps our stock levels optimal. Highly recommend DealerEdge!"</p>
-        <h4 class="mt-6 font-semibold text-gray-800">- Ben Elef, EquipMart</h4>
-      </div>
-      <!-- Add more testimonials as needed -->
+  <!-- Kyocera Deals -->
+  <section id="models" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+    <div class="flex items-end justify-between gap-6">
+      <h2 class="text-2xl md:text-3xl font-bold text-slate-900">Featured Kyocera Deals</h2>
+      <a href="#contact" class="hidden md:inline-block text-emerald-700 font-semibold hover:underline">Need a different model?</a>
     </div>
-  </div>
-</section>
 
-<!-- Screenshots Section -->
-<!-- <ScreenshotsSection {screenshots} /> -->
-
-<!-- Integrations Section -->
-<IntegrationsSection />
-
-<!-- Pricing Section -->
-<section id="pricing" class="py-20 bg-gray-800">
-  <div class="container mx-auto px-4">
-    <h2 class="text-4xl font-bold text-center mb-12 text-gray-50">💰 Pricing</h2>
-    <div class="flex flex-col md:flex-row justify-center items-center gap-12">
-      <!-- Basic Plan -->
-      <div class="bg-white text-slate-800 rounded-lg shadow-md w-full max-w-md p-8 flex flex-col">
-        <h3 class="text-2xl font-semibold mb-4 text-gray-800">Basic</h3>
-        <p class="text-4xl font-extrabold mb-6">$99<span class="text-xl">/ month</span></p>
-        <ul class="flex-1 mb-6 space-y-3">
-          <li class="flex items-center"><span class="mr-2 text-green-500">📦</span> Basic Inventory Management</li>
-          <li class="flex items-center"><span class="mr-2 text-green-500">📊</span> QuickBooks Integration</li>
-          <li class="flex items-center"><span class="mr-2 text-green-500">✉️</span> Email Support</li>
-        </ul>
-        <button
-          class="bg-slate-800 text-white px-4 py-3 rounded-md hover:bg-slate-700 transition-colors"
-          on:click={() => isModalOpen = true}
-        >
-          Choose Basic
-        </button>
-      </div>
-      <!-- Professional Plan -->
-      <div class="bg-white text-slate-800 rounded-lg shadow-md w-full max-w-md p-8 flex flex-col">
-        <h3 class="text-2xl font-semibold mb-4 text-gray-800">Professional</h3>
-        <p class="text-4xl font-extrabold mb-6">$139<span class="text-xl">/ month</span></p>
-        <ul class="flex-1 mb-6 space-y-3">
-          <li class="flex items-center"><span class="mr-2 text-green-500">✅</span> All Basic Features</li>
-          <li class="flex items-center"><span class="mr-2 text-green-500">🤖</span> AI-Powered Analytics</li>
-          <li class="flex items-center"><span class="mr-2 text-green-500">🚚</span> Integrated Shipping</li>
-          <li class="flex items-center"><span class="mr-2 text-green-500">🔝</span> Priority Support</li>
-        </ul>
-        <button
-          class="bg-slate-800 text-white px-4 py-3 rounded-md hover:bg-slate-700 transition-colors"
-          on:click={() => isModalOpen = true}
-        >
-          Choose Professional
-        </button>
-      </div>
-      <!-- Enterprise Plan -->
-      <div class="bg-white text-slate-800 rounded-lg shadow-md w-full max-w-md p-8 flex flex-col">
-        <h3 class="text-2xl font-semibold mb-4 text-gray-800">Enterprise</h3>
-        <p class="text-4xl font-extrabold mb-6">$199<span class="text-xl">/ month</span></p>
-        <ul class="flex-1 mb-6 space-y-3">
-          <li class="flex items-center"><span class="mr-2 text-green-500">🚀</span> All Professional Features</li>
-          <li class="flex items-center"><span class="mr-2 text-green-500">⚙️</span> Customizable Dashboards</li>
-          <li class="flex items-center"><span class="mr-2 text-green-500">🔐</span> Advanced Security</li>
-          <li class="flex items-center"><span class="mr-2 text-green-500">📞</span> 24/7 Support</li>
-        </ul>
-        <button
-          class="bg-slate-800 text-white px-4 py-3 rounded-md hover:bg-slate-700 transition-colors"
-          on:click={() => isModalOpen = true}
-        >
-          Choose Enterprise
-        </button>
-      </div>
-    </div>
-    <p class="text-center mt-8 text-gray-600">* Free 14-day trial available.</p>
-  </div>
-</section>
-
-<!-- Comparison Chart Component -->
-<!-- <section id="comparison" class="py-24 bg-gray-100">
-  <div class="container mx-auto px-6">
-    <h2 class="text-5xl font-extrabold text-center mb-16 text-gray-800">📊 Why Choose DealerEdge Over e-Automate</h2>
-    <div class="overflow-x-auto">
-      <table class="min-w-full bg-white rounded-lg shadow-md">
-        <thead>
-          <tr>
-            <th class="py-4 px-6 bg-gray-200 text-left text-sm font-semibold text-gray-700">Feature</th>
-            <th class="py-4 px-6 bg-gray-200 text-start text-sm font-semibold text-gray-700">e-Automate</th>
-            <th class="py-4 px-6 bg-gray-200 text-start text-sm font-semibold text-gray-700">DealerEdge</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="border-b">
-            <td class="py-4 px-6 text-gray-700">Automated Purchasing</td>
-            <td class="py-4 px-6 text-start text-gray-700">❌ Manual Process</td>
-            <td class="py-4 px-6 text-start text-green-500">✅ Automatic Purchase from Cheapest Vendor</td>
-          </tr>
-          <tr class="border-b bg-gray-50">
-            <td class="py-4 px-6 text-gray-700">Service Contract Billing</td>
-            <td class="py-4 px-6 text-start text-gray-700">❌ Manual Billing</td>
-            <td class="py-4 px-6 text-start text-green-500">✅ Automatic Billing</td>
-          </tr>
-          <tr class="border-b">
-            <td class="py-4 px-6 text-gray-700">User Interface</td>
-            <td class="py-4 px-6 text-start text-gray-700">❌ Outdated & Clunky</td>
-            <td class="py-4 px-6 text-start text-green-500">✅ Modern & Intuitive</td>
-          </tr>
-          <tr class="border-b bg-gray-50">
-            <td class="py-4 px-6 text-gray-700">Omnichannel Communications</td>
-            <td class="py-4 px-6 text-start text-gray-700">❌ Limited Channels</td>
-            <td class="py-4 px-6 text-start text-green-500">✅ Multiple Channels Integrated</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="mt-12 text-center">
-      <button
-        class="bg-slate-800 text-white px-6 py-3 rounded-md hover:bg-slate-700 transition-colors"
-        on:click={() => {
-          isModalOpen = true
-          }
-        }
-      >
-        Make the Switch Today
-      </button>
-    </div>
-  </div>
-</section>
--->
-<!-- About Us Section -->
-<section id="about" class="py-20 bg-white">
-  <div class="container mx-auto px-4 flex flex-col lg:flex-row items-center gap-12">
-    <div class="lg:w-2/3">
-      <h2 class="text-4xl font-bold mb-6 text-gray-800">🏢 About Us</h2>
-      <h3 class="text-2xl font-semibold mb-4 text-gray-700">Our Mission</h3>
-      <p class="text-gray-600 mb-6">At DealerEdge, our mission is to empower office equipment dealers with a modern, efficient, and secure management system that enhances profitability and streamlines operations.</p>
-      <h3 class="text-2xl font-semibold mb-4 text-gray-700">Why Choose DealerEdge</h3>
-      <p class="text-gray-600">Unlike outdated systems, DealerEdge is built with the latest technology, ensuring ease of use, robust security, and seamless integrations that cater specifically to the needs of today's dealers.</p>
-    </div>
-    <div class="lg:w-1/3 mt-8 lg:mt-0">
-      <img src="about-us-2.jpg" alt="About DealerEdge" class="rounded-lg shadow-lg w-full h-auto object-cover">
-    </div>
-  </div>
-</section>
-
-<!-- Contact Us Section -->
-<section id="contact" class="py-20 bg-gray-800 text-white">
-  <div class="container mx-auto px-4">
-    <h2 class="text-4xl font-bold text-center mb-12">📞 Contact Us</h2>
-    <div class="flex flex-col lg:flex-row gap-12">
-      <!-- Contact Form -->
-      <div class="lg:w-1/2">
-        <form on:submit|preventDefault={() => isModalOpen = true} class="space-y-6">
-          <div>
-            <label for="name" class="block text-white mb-2">Name*</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              placeholder="Your Name"
-              required
-              class="w-full p-4 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-slate-400"
-            />
+    <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+      {#each models as m}
+        <article class="group rounded-2xl border border-slate-200 bg-white shadow-sm hover:shadow-md transition">
+          <div class="aspect-[4/3] w-full overflow-hidden rounded-t-2xl bg-slate-100">
+            <img src={m.image} alt={m.name} class="h-full w-auto mx-auto object-cover p-6" loading="lazy" />
           </div>
-          <div>
-            <label for="email" class="block text-white mb-2">Email*</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="you@example.com"
-              required
-              class="w-full p-4 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-slate-400"
-            />
+          <div class="p-6">
+            <h3 class="font-semibold text-lg">{m.name}</h3>
+            <p class="mt-2 text-slate-600">{m.blurb}</p>
+            <div class="mt-4 flex items-center justify-between">
+              <span class="text-xl font-bold text-slate-900">{m.price}</span>
+              <a href="#contact" class="rounded-lg bg-slate-900 px-4 py-2 text-white font-medium group-hover:bg-[#0D2B45]">
+                {m.cta}
+              </a>
+            </div>
           </div>
-          <div>
-            <label for="message" class="block text-white mb-2">Message*</label>
-            <textarea
-              id="message"
-              name="message"
-              rows="5"
-              placeholder="Your message..."
-              required
-              class="w-full p-4 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-slate-400"
-            ></textarea>
+        </article>
+      {/each}
+    </div>
+
+    <div class="mt-6 text-center md:hidden">
+      <a href="#contact" class="text-emerald-700 font-semibold hover:underline">Need a different model?</a>
+    </div>
+  </section>
+
+  <!-- Why Us -->
+  <section id="why" class="bg-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+      <h2 class="text-2xl md:text-3xl font-bold text-slate-900">Why Summit Copiers</h2>
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="rounded-2xl border border-slate-200 p-6">
+          <h3 class="font-semibold text-lg">Mountain-Local, Fast Response</h3>
+          <p class="mt-2 text-slate-600">Technicians based in Summit & Eagle counties. We know the terrain, weather, and what “urgent” means during season.</p>
+        </div>
+        <div class="rounded-2xl border border-slate-200 p-6">
+          <h3 class="font-semibold text-lg">Unbeatable Kyocera Pricing</h3>
+          <p class="mt-2 text-slate-600">Flexible leases and transparent CPC. We’ll beat any comparable Kyocera quote in the Rockies.</p>
+        </div>
+        <div class="rounded-2xl border border-slate-200 p-6">
+          <h3 class="font-semibold text-lg">Managed Print That Just Works</h3>
+          <p class="mt-2 text-slate-600">Automated supplies, remote monitoring, workflow apps, and set-and-forget reliability.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Areas -->
+  <section id="areas" class="bg-slate-900 text-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+      <div class="flex items-end justify-between gap-6">
+        <h2 class="text-2xl md:text-3xl font-bold">Proudly Serving the Colorado Rockies</h2>
+        <span class="hidden md:inline-block text-emerald-300">Same-week installs available</span>
+      </div>
+      <ul class="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+        {#each serviceAreas as city}
+          <li class="rounded-xl border border-white/10 bg-white/5 px-4 py-3">{city}</li>
+        {/each}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Contact / Quote -->
+  <section id="contact" class="bg-gradient-to-b from-slate-50 to-white">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-bold text-slate-900">Get a Fast Quote</h2>
+          <p class="mt-3 text-slate-600">Tell us a bit about your team and print volume—we’ll recommend the right Kyocera and deliver/install on your schedule.</p>
+          <div class="mt-6 space-y-3 text-slate-700">
+            <div class="flex items-center gap-3">
+              <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">1</span>
+              <p>Share basic info (team size, monthly pages, color vs B/W)</p>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">2</span>
+              <p>Pick your lease or purchase option (we’ll show total cost)</p>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="inline-flex h-8 w-8 items-center justify-center rounded-full bg-emerald-100 text-emerald-700">3</span>
+              <p>Schedule delivery & install—often same week</p>
+            </div>
           </div>
-          <button
-            type="submit"
-            class="w-full bg-slate-800 text-white px-6 py-3 rounded-md hover:bg-slate-700 transition-colors"
-          >
-            Send Message
+        </div>
+
+        <!-- Simple no-backend form (wire to your endpoint later) -->
+        <form class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-slate-700">Name</label>
+              <input required class="mt-1 w-full rounded-lg border-slate-300 focus:border-emerald-500 focus:ring-emerald-500" placeholder="Jane Doe" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-700">Company</label>
+              <input class="mt-1 w-full rounded-lg border-slate-300 focus:border-emerald-500 focus:ring-emerald-500" placeholder="Acme Resorts" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-700">Email</label>
+              <input type="email" required class="mt-1 w-full rounded-lg border-slate-300 focus:border-emerald-500 focus:ring-emerald-500" placeholder="you@company.com" />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-700">Phone</label>
+              <input class="mt-1 w-full rounded-lg border-slate-300 focus:border-emerald-500 focus:ring-emerald-500" placeholder="(555) 555-5555" />
+            </div>
+            <div class="sm:col-span-2">
+              <label class="block text-sm font-medium text-slate-700">Where are you located?</label>
+              <input class="mt-1 w-full rounded-lg border-slate-300 focus:border-emerald-500 focus:ring-emerald-500" placeholder="e.g., Breckenridge, CO" />
+            </div>
+            <div class="sm:col-span-2">
+              <label class="block text-sm font-medium text-slate-700">Notes</label>
+              <textarea rows="4" class="mt-1 w-full rounded-lg border-slate-300 focus:border-emerald-500 focus:ring-emerald-500" placeholder="Monthly pages, color vs B/W, finishing needs..." />
+            </div>
+          </div>
+          <button type="submit" class="mt-5 w-full rounded-xl bg-emerald-600 px-6 py-3 font-semibold text-white hover:bg-emerald-700">
+            Request My Quote
           </button>
+          <p class="mt-3 text-center text-xs text-slate-500">By submitting, you agree to be contacted about your quote.</p>
         </form>
       </div>
-      <!-- Contact Information -->
-      <div class="lg:w-1/2">
-        <!-- <h3 class="text-2xl font-semibold mb-4">📍 Get in Touch</h3> -->
-        <p class="flex items-center mb-3"><span class="mr-3">📍</span> 4760 NW 65th Ave,<br/> Suite 200, <br/>Fort Lauderdale, FL 33319</p>
-        <!-- <p class="flex items-center mb-3"><span class="mr-3">📞</span> (347) 456-7890</p> -->
-        <p class="flex items-center"><span class="mr-3">✉️</span> support@dealeredge.com</p>
-      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Footer -->
-<footer class="bg-gray-800 text-white py-8">
-  <div class="container mx-auto px-4 text-center">
-    <p class="">&copy; 2024 DealerEdge. All rights reserved.</p>
-    <div class="mt-4 flex justify-center space-x-6">
-      <a href="#" class="hover:text-gray-400 transition-colors">Privacy Policy</a>
-      <a href="#" class="hover:text-gray-400 transition-colors">Terms of Service</a>
-      <a href="#" class="hover:text-gray-400 transition-colors">Sitemap</a>
-    </div>
-    <div class="mt-4 flex justify-center space-x-6">
-      <!-- Social Media Links with Emojis -->
-      <a href="#" class="text-2xl hover:text-gray-400 transition-colors" aria-label="LinkedIn">🔗</a>
-      <a href="#" class="text-2xl hover:text-gray-400 transition-colors" aria-label="Twitter">🐦</a>
-      <a href="#" class="text-2xl hover:text-gray-400 transition-colors" aria-label="Facebook">💼</a>
-      <a href="#" class="text-2xl hover:text-gray-400 transition-colors" aria-label="Instagram">📸</a>
-    </div>
-  </div>
-</footer>
-
-<!-- Modal Component -->
-<Modal isOpen={isModalOpen} on:close={() => isModalOpen = false} />
+</div>
